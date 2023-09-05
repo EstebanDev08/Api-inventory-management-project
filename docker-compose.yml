@@ -1,0 +1,33 @@
+services:
+  backend:
+    build: .
+    ports:
+      - 3000:3000
+      - 9229:9229 # debugger port
+    volumes:
+      - .:/usr/src/app
+    command: pnpm start:debugger
+    environment:
+      PORT: 3000
+
+  postgres:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./db:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
+      MAX_LOGIN_ATTEMPTS: 0
+    ports:
+      - 5050:80

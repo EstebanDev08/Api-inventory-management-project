@@ -1,0 +1,44 @@
+# dependencies
+/node_modules
+
+# production
+dist
+
+# logs
+*.log
+
+# Editor
+# .vscode/
+.idea/
+
+# Dependencias específicas de sistemas operativos
+Thumbs.db
+.DS_Store
+Desktop.ini
+
+# Archivos de configuración y credenciales
+.env
+.env.local
+.env.*.local
+.env.test
+.env.prod
+.env.example
+.env.development
+.env.production
+.env.staging
+
+# Archivos generados por herramientas de construcción
+build/
+out/
+*.tsbuildinfo
+*.map
+
+# Historial y caché de paquetes
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnp/
+.pnp.js
+
+app.log
+db

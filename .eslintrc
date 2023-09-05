@@ -1,0 +1,22 @@
+{
+  "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "ignorePatterns": [
+    "dist/",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "node_modules/",
+    "scripts/migrations",
+    "scripts/seeders"
+  ],
+  "overrides": [
+    {
+      "files": ["src/**/*.ts"],
+      "excludedFiles": "src/**/*.d.ts",
+      "parserOptions": {
+        "project": "tsconfig.json"
+      }
+    }
+  ]
+}
