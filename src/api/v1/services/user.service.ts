@@ -16,7 +16,9 @@ class UserService {
   }
 
   async findOneUser(id: number) {
-    const user = await this.model.findByPk(id);
+    const user = await this.model.findByPk(id, {
+      attributes: { exclude: ['password'] },
+    });
 
     if (!user) {
       throw Boom.notFound(' Username does not exist ');
@@ -30,13 +32,23 @@ class UserService {
       include: this.associations,
       limit: 30,
       offset: 0,
+      attributes: { exclude: ['password'] },
     };
 
-    const { limit, offset } = query;
+    const { limit, offset, rol, isActive } = query;
 
     if (limit && offset) {
       options.limit = parseInt(limit as string);
       options.offset = parseInt(offset as string);
+    }
+
+    if (rol || isActive) {
+      const where = {
+        ...(rol !== undefined && { rol }),
+        ...(isActive !== undefined && { isActive }),
+      };
+
+      options.where = where;
     }
 
     const users = await this.model.findAll(options);
@@ -54,6 +66,8 @@ class UserService {
     if (!data) {
       throw Boom.badRequest();
     }
+
+    delete newUser?.dataValues?.password;
 
     return newUser;
   }

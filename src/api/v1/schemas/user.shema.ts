@@ -2,9 +2,7 @@ import Joi from 'joi';
 
 const id = Joi.number().min(0);
 const email = Joi.string().email();
-const password = Joi.string()
-  .min(8)
-  .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/);
+const password = Joi.string().min(8);
 const rol = Joi.string().valid('admin', 'limit');
 const isActive = Joi.boolean();
 const limit = Joi.number().min(2);

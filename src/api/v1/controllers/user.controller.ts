@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
-import { json } from 'sequelize';
 
 const userService = new UserService();
 
@@ -11,7 +10,7 @@ class UserController {
 
       const user = await userService.findOneUser(parseInt(id));
 
-      res.status(200), json(user);
+      res.status(200).json(user);
     } catch (error) {
       next(error);
     }
