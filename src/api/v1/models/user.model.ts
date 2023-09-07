@@ -1,4 +1,5 @@
 import { DataTypes, Model, Optional, Sequelize } from 'sequelize';
+import { encryptData } from '../../../framework/utils/bcrypt';
 
 const USER_TABLE = 'user';
 
@@ -60,6 +61,14 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
       tableName: USER_TABLE,
       modelName: 'user',
       timestamps: false,
+      hooks: {
+        beforeCreate: async (user: User) => {
+          const ecriptedPassword = await encryptData(user.password);
+          console.log('create');
+
+          user.password = ecriptedPassword;
+        },
+      },
     };
   }
 }

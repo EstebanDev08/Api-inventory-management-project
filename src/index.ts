@@ -17,9 +17,9 @@ app.use(express.json()); // Para analizar JSON en el cuerpo
 
 routerApi(app);
 
-app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
+app.use(logErrors);
 app.use(errorHandler);
 
 const port = Number(process.env.PORT ?? 3000);

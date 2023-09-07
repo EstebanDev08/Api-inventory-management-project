@@ -41,10 +41,11 @@ function ormErrorHandler(
   next: NextFunction
 ) {
   if (err instanceof ValidationError) {
+    console.log('ormmmmmmmmmmm');
     res.status(409).json({
       statusCode: 409,
       message: err.name,
-      Errors: err.errors,
+      Error: err.errors[0].message,
     });
   }
   next(err);

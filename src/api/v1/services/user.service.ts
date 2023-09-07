@@ -61,15 +61,28 @@ class UserService {
   }
 
   async createUser(data: UserInput) {
-    const newUser = await this.model.create(data);
+    await this.isEmailUnique(data.email);
 
-    if (!data) {
-      throw Boom.badRequest();
-    }
+    const newUser = await this.model.create(data);
 
     delete newUser?.dataValues?.password;
 
     return newUser;
+  }
+
+  async isEmailUnique(email: string) {
+    const user = await this.model.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (user) {
+      throw Boom.badRequest('email already exist');
+    }
+    // Si usuarioExistente es null, el correo electrónico es único
+    // Si usuarioExistente no es null, el correo electrónico ya está en uso
+    return !user;
   }
 }
 
