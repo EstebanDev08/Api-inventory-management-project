@@ -7,12 +7,12 @@ import { UserInput } from '../models/user.model';
 class UserService {
   sequelizeConection: Sequelize;
   model;
-  associations;
+  associations: never[];
 
   constructor() {
     this.sequelizeConection = sequelize;
     this.model = this.sequelizeConection.models.user;
-    this.associations = [''];
+    this.associations = [];
   }
 
   async findOneUser(id: number) {

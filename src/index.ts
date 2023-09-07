@@ -15,12 +15,12 @@ app.get('/', (req: Request, res: Response) => {
 
 app.use(express.json()); // Para analizar JSON en el cuerpo
 
+routerApi(app);
+
 app.use(logErrors);
 app.use(ormErrorHandler);
 app.use(boomErrorHandler);
 app.use(errorHandler);
-
-routerApi(app);
 
 const port = Number(process.env.PORT ?? 3000);
 app.listen(port, () => {
