@@ -2,6 +2,7 @@ import express from 'express';
 import { validatorHandler } from '../middlewares/validatorHandler';
 import {
   createUserSchema,
+  emailUserSchema,
   getUserSchema,
   getUsersFilters,
 } from '../schemas/user.shema';
@@ -25,6 +26,12 @@ userRouter.post(
   '/',
   validatorHandler(createUserSchema, 'body'),
   UserController.createUser
+);
+
+userRouter.get(
+  '/verify-email',
+  validatorHandler(emailUserSchema, 'body'),
+  UserController.isAvalibleEmail
 );
 
 export { userRouter };

@@ -39,6 +39,22 @@ class UserController {
       next(error);
     }
   }
+
+  static async isAvalibleEmail(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    try {
+      const { email } = req.body;
+
+      const isEmailUnique = await userService.isEmailUnique(email);
+
+      res.status(200).json({ isAvalible: isEmailUnique });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export { UserController };

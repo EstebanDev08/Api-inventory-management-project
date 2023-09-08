@@ -8,7 +8,6 @@ const validatorHandler = (shema: Schema, property: keyof Request) => {
 
     const { error } = shema.validate(data, { abortEarly: false });
     if (error) {
-      console.log('ormmmmmmmmmmm');
       next(badRequest(error));
 
       res.status(409).json({ error: badRequest(error).message });

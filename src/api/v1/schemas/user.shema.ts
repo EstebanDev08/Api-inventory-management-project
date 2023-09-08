@@ -26,4 +26,8 @@ const createUserSchema = Joi.object({
   isActive: isActive,
 });
 
-export { getUserSchema, getUsersFilters, createUserSchema };
+const emailUserSchema = Joi.object({
+  email: email.required(),
+});
+
+export { getUserSchema, getUsersFilters, createUserSchema, emailUserSchema };
