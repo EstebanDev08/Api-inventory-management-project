@@ -80,8 +80,7 @@ class UserService {
     if (user) {
       throw Boom.badRequest('email already exist');
     }
-    // Si usuarioExistente es null, el correo electrónico es único
-    // Si usuarioExistente no es null, el correo electrónico ya está en uso
+
     return !user;
   }
 }

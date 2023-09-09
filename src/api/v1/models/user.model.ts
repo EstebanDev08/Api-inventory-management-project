@@ -41,6 +41,11 @@ const userSchema = {
     type: DataTypes.BOOLEAN,
     defaultValue: true,
   },
+
+  company: {
+    allowNull: false,
+    type: DataTypes.INTEGER,
+  },
 };
 
 export interface UserInput extends Optional<UserAttributes, 'id'> {}

@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
+      company: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
     });
   },
 
