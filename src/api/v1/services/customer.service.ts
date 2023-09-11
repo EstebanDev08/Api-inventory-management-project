@@ -79,27 +79,18 @@ class CustomerService {
   async deleteCustomer(id: number) {
     const customer = await this.findOneCustomer(id);
 
-    if (!customer) {
-      throw boom.badRequest('customer does not exist');
-    }
     customer.destroy();
-
-    return { deleted: true };
   }
 
   async updateCustomer(id: number, props: customerInput) {
     const customer = await this.findOneCustomer(id);
-
-    if (!customer) {
-      throw boom.badRequest('customer does not exist');
-    }
 
     const newCustomer = await customer.update(props);
 
     return newCustomer;
   }
 
-  async isAvalibleNumber(number: number) {
+  async isAvaliblseNumber(number: number) {
     const customer = await this.model.findOne({
       where: { cellPhoneNumber: number },
     });
