@@ -29,4 +29,17 @@ const createCustomerSchema = Joi.object({
   userId: userId.required(),
 });
 
-export { getCustomerSchema, getCustomersFilters, createCustomerSchema };
+const updateCustomerSchema = Joi.object({
+  name: name,
+  lastName: lastName,
+  cellPhoneNumber: cellPhoneNumber,
+  country: country,
+  avatar: avatar,
+});
+
+export {
+  getCustomerSchema,
+  getCustomersFilters,
+  createCustomerSchema,
+  updateCustomerSchema,
+};
