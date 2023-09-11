@@ -7,17 +7,18 @@ import { UserInput } from '../models/user.model';
 class UserService {
   sequelizeConection: Sequelize;
   model;
-  associations: never[];
+  associations: string[];
 
   constructor() {
     this.sequelizeConection = sequelize;
     this.model = this.sequelizeConection.models.user;
-    this.associations = [];
+    this.associations = ['customer'];
   }
 
   async findOneUser(id: number) {
     const user = await this.model.findByPk(id, {
       attributes: { exclude: ['password'] },
+      include: this.associations,
     });
 
     if (!user) {

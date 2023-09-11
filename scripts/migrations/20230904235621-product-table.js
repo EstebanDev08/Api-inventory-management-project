@@ -33,14 +33,64 @@ module.exports = {
         type: Sequelize.BOOLEAN,
         defaultValue: true,
       },
-      company: {
+      companyId: {
+        field: 'company_id',
         allowNull: false,
         type: Sequelize.INTEGER,
+      },
+    });
+
+    await queryInterface.createTable('customer', {
+      id: {
+        autoIncrement: true,
+        primaryKey: true,
+        allowNull: false,
+        type: Sequelize.INTEGER,
+      },
+
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
+
+      lastName: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        field: 'last_name',
+      },
+
+      cellPhoneNumber: {
+        field: 'cell_phone_number',
+        type: Sequelize.NUMBER,
+        allowNull: true,
+        unique: true,
+      },
+
+      country: {
+        type: Sequelize.NUMBER,
+        allowNull: false,
+      },
+
+      avatar: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+
+      userId: {
+        field: 'user_id',
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        unique: true,
+        references: {
+          model: 'user',
+          key: 'id',
+        },
       },
     });
   },
 
   async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('customer');
     await queryInterface.dropTable('user');
   },
 };

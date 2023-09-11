@@ -9,6 +9,7 @@ export interface UserAttributes {
   password: string;
   rol: string;
   isActive: boolean;
+  companyId: number;
 }
 
 const userSchema = {
@@ -42,7 +43,8 @@ const userSchema = {
     defaultValue: true,
   },
 
-  company: {
+  companyId: {
+    field: 'company_id',
     allowNull: false,
     type: DataTypes.INTEGER,
   },
@@ -57,8 +59,15 @@ class User extends Model<UserAttributes, UserInput> implements UserAttributes {
   public password!: string;
   public rol!: string;
   public isActive!: boolean;
+  public companyId!: number;
 
-  static associate() {}
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static associate(models: any) {
+    this.hasOne(models.customer, {
+      as: 'customer',
+      foreignKey: 'userId',
+    });
+  }
 
   static config(sequelize: Sequelize) {
     return {
