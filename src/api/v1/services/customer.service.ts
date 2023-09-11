@@ -34,10 +34,15 @@ class CustomerService {
 
   async findAllCustomer(query: QueryString.ParsedQs) {
     const options: FindOptions = {
-      include: this.associations,
+      include: [
+        {
+          association: this.associations[0],
+          attributes: { exclude: ['password', 'id'] },
+        },
+      ],
+      attributes: { exclude: ['userId'] },
       limit: 30,
       offset: 0,
-      attributes: { exclude: ['password'] },
     };
 
     const { limit, offset, country } = query;
@@ -58,7 +63,7 @@ class CustomerService {
     const customers = await this.model.findAll(options);
 
     if (customers.length <= 0) {
-      throw boom.badRequest();
+      throw boom.badRequest('There are no users with those parameters');
     }
     return customers;
   }
@@ -67,6 +72,8 @@ class CustomerService {
     if (!data) {
       throw boom.badRequest();
     }
+    console.log(data);
+
     const newCustomer = await this.model.create(data);
 
     if (!newCustomer) {

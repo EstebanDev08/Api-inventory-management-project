@@ -3,7 +3,7 @@ import Joi from 'joi';
 const id = Joi.number().min(0);
 const email = Joi.string().email();
 const password = Joi.string().min(8);
-const company = Joi.string().min(8);
+const companyId = Joi.number().min(0);
 const rol = Joi.string().valid('admin', 'limit');
 const isActive = Joi.boolean();
 const limit = Joi.number().min(2);
@@ -25,7 +25,7 @@ const createUserSchema = Joi.object({
   password: password.required(),
   rol: rol,
   isActive: isActive,
-  company: company,
+  companyId: companyId,
 });
 
 const emailUserSchema = Joi.object({

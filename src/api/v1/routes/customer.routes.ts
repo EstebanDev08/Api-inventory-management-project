@@ -40,3 +40,5 @@ customerRouter.delete(
   validatorHandler(getCustomerSchema, 'params'),
   CustomerController.deleteCustomer
 );
+
+export { customerRouter };
