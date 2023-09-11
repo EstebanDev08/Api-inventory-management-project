@@ -61,13 +61,13 @@ module.exports = {
 
       cellPhoneNumber: {
         field: 'cell_phone_number',
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: true,
         unique: true,
       },
 
       country: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.INTEGER,
         allowNull: false,
       },
 

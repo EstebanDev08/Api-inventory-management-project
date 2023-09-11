@@ -22,7 +22,7 @@ class UserService {
     });
 
     if (!user) {
-      throw Boom.notFound(' Username does not exist ');
+      throw Boom.notFound(' User does not exist ');
     }
 
     return user;

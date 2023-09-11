@@ -34,13 +34,13 @@ const customerSchema = {
 
   cellPhoneNumber: {
     field: 'cell_phone_number',
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: true,
     unique: true,
   },
 
   country: {
-    type: DataTypes.NUMBER,
+    type: DataTypes.INTEGER,
     allowNull: false,
   },
 
@@ -75,6 +75,11 @@ class Customer
   public country!: string;
   public avatar!: string;
   public userId!: number;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static associate(models: any) {
+    this.belongsTo(models.user, { as: 'user' });
+  }
 
   static config(sequelize: Sequelize) {
     return {

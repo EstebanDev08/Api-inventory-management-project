@@ -3,7 +3,6 @@ import Joi from 'joi';
 const id = Joi.number().min(0);
 const name = Joi.string().min(1);
 const lastName = Joi.string().min(1);
-const company = Joi.string().min(1);
 const cellPhoneNumber = Joi.number().integer();
 const country = Joi.string().min(1);
 const avatar = Joi.string().uri();
@@ -18,12 +17,12 @@ const getCustomerSchema = Joi.object({
 const getCustomersFilters = Joi.object({
   limit: limit,
   offset: offset,
+  country: country,
 });
 
 const createCustomerSchema = Joi.object({
   name: name.required(),
   lastName: lastName.required(),
-  company: company,
   cellPhoneNumber: cellPhoneNumber,
   country: country.required(),
   avatar: avatar,

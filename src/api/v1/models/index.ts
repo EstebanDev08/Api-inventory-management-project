@@ -8,6 +8,7 @@ const setupModels = (sequelize: Sequelize) => {
 
   //associations
   User.associate(sequelize.models);
+  Customer.associate(sequelize.models);
   console.log(sequelize.models);
 };
 
