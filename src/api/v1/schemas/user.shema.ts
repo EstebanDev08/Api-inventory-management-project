@@ -18,6 +18,7 @@ const getUsersFilters = Joi.object({
   offset: offset,
   isActive: isActive,
   rol: rol,
+  companyId: companyId,
 });
 
 const createUserSchema = Joi.object({

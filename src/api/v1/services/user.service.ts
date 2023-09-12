@@ -36,17 +36,18 @@ class UserService {
       attributes: { exclude: ['password'] },
     };
 
-    const { limit, offset, rol, isActive } = query;
+    const { limit, offset, rol, isActive, companyId } = query;
 
     if (limit && offset) {
       options.limit = parseInt(limit as string);
       options.offset = parseInt(offset as string);
     }
 
-    if (rol || isActive) {
+    if (rol || isActive || companyId) {
       const where = {
         ...(rol !== undefined && { rol }),
         ...(isActive !== undefined && { isActive }),
+        ...(companyId !== undefined && { companyId }),
       };
 
       options.where = where;
@@ -83,6 +84,20 @@ class UserService {
     }
 
     return !user;
+  }
+
+  async findByEmail(email: string) {
+    const user = await this.model.findOne({
+      where: {
+        email: email,
+      },
+    });
+
+    if (!user) {
+      throw Boom.badRequest('no data found');
+    }
+
+    return user;
   }
 }
 

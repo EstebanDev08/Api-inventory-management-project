@@ -6,6 +6,8 @@ import {
   logErrors,
   ormErrorHandler,
 } from './api/v1/middlewares/errorHandler';
+import myPassport from './api/v1/auth';
+import session from 'express-session';
 
 const app = express();
 
@@ -13,7 +15,24 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Hello, World');
 });
 
-app.use(express.json()); // Para analizar JSON en el cuerpo
+app.use(express.json());
+
+app.use(myPassport.initialize());
+
+app.use(
+  session({
+    secret: 'tu_secreto',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
+
+app.use(myPassport.session());
 
 routerApi(app);
 

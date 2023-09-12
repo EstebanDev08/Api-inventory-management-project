@@ -12,12 +12,15 @@ const userRouter = express.Router();
 
 userRouter.get(
   '/:id',
+
   validatorHandler(getUserSchema, 'params'),
+
   UserController.getUser
 );
 
 userRouter.get(
   '/',
+
   validatorHandler(getUsersFilters, 'query'),
   UserController.getUsers
 );
