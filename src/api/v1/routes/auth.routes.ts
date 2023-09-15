@@ -3,7 +3,6 @@ import passport from 'passport';
 import { validatorHandler } from '../middlewares/validatorHandler';
 import { loginSchema } from '../schemas/auth.schema';
 import { AuthController } from '../controllers/auth.controller';
-import { verifySession } from '../middlewares/authHandler';
 
 const authRouter = Router();
 

@@ -8,6 +8,7 @@ import {
 } from './api/v1/middlewares/errorHandler';
 import myPassport from './api/v1/auth';
 import session from 'express-session';
+import { config } from './framework/config/config';
 
 const app = express();
 
@@ -21,7 +22,7 @@ app.use(myPassport.initialize());
 
 app.use(
   session({
-    secret: 'tu_secreto',
+    secret: config.cookieKey as string,
     resave: false,
     saveUninitialized: false,
     cookie: {

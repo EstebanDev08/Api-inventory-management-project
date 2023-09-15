@@ -8,6 +8,7 @@ interface Config {
   dbPassword: string | undefined;
   dbHost: string | undefined;
   dbName: string | undefined;
+  cookieKey: string | undefined;
 }
 
 const config: Config = {
@@ -17,6 +18,7 @@ const config: Config = {
   dbPassword: process.env.DB_PASSWORD,
   dbHost: process.env.DB_HOST,
   dbName: process.env.DB_NAME,
+  cookieKey: process.env.COOKIE_KEY,
 };
 
 export { config };
